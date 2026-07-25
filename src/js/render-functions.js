@@ -2,24 +2,32 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
 
 
-const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
+const lightbox = new SimpleLightbox('.gallery a', { 
+  captionsData: 'alt', captionDelay: 250, 
+});
 
 export function createGallery(images) {
-  const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
+  const markup = images
+  .map(
+    ({ 
+      webformatURL, largeImageURL, tags, likes, views, comments, downloads 
+    }) => `
     <li class="gallery-item">
       <a href="${largeImageURL}">
         <img src="${webformatURL}" alt="${tags}" loading="lazy">
       </a>
       <div class="info">
-        <p><b>Likes:</b> ${likes}</p>
-        <p><b>Views:</b> ${views}</p>
-        <p><b>Comments:</b> ${comments}</p>
-        <p><b>Downloads:</b> ${downloads}</p>
+        <p><b>Likes:</b><br>${likes}</p>
+        <p><b>Views:</b><br>${views}</p>
+        <p><b>Comments:</b><br>${comments}</p>
+        <p><b>Downloads:</b><br>${downloads}</p>
       </div>
     </li>
-  `).join('');
+  `)
+  .join('');
   gallery.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
@@ -29,7 +37,7 @@ export function clearGallery() {
 }
 
 
-const loader = document.getElementById('loader');
+//const loader = document.getElementById('loader');
 export function showLoader() {
   loader.classList.remove('hidden');
 }
